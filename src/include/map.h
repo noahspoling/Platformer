@@ -15,4 +15,9 @@ void addFloor(Map *map, int x, int y, int width, int tile);
 void addWall(Map *map, int x, int y, int height, int tile);
 void setTile(Map *map, int x, int y, int tile);
 
+
+// For stacks needing to allocate and deallocate memory
+// void allocateMap(Map *map);
+// void deallocateMap(Map *map);
+
 #endif // MAP_H

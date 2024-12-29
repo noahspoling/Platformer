@@ -2,7 +2,7 @@
 #define PHYSICS_BODY_H
 
 #include "raylib.h"
-#include "transform.h"
+#include "gameTransform.h"
 #include "collisionBox.h"
 
 /*

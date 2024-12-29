@@ -1,8 +1,9 @@
 #ifndef CONFIG_H
 #define CONFIG_H
 
-#define WINDOW_WIDTH 1280
-#define WINDOW_HEIGHT 960
+// Shader configuration
+#define CRT_VERTEX_SHADER_PATH "resources/shaders/crt.vs"
+#define CRT_FRAGMENT_SHADER_PATH "resources/shaders/crt.fs"
 
 
 // Game configuration
@@ -12,7 +13,14 @@
 #define MAP_HEIGHT 30
 #define TILE_SIZE 32
 
-#define PLAYER_SPEED 5
+#define WINDOW_WIDTH MAP_WIDTH * TILE_SIZE
+#define WINDOW_HEIGHT MAP_HEIGHT * TILE_SIZE
+
+#define PLAYER_SPEED 10
+#define PLAYER_ACCELERATION 1
+#define MAX_PLAYER_SPEED 40
+#define MAX_PLAYER_ACCELERATION 10
+
 
 #define GRAVITY 10
 

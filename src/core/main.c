@@ -1,19 +1,21 @@
 #include "raylib.h"
-
 #include "config.h"
-
 #include "game.h"
+#include "player.h"
+#include "input.h"
+#include "renderer.h"
 
 int main(void)
 {
-    InitWindow(WINDOW_WIDTH, WINDOW_HEIGHT, "Raylib - Hello World");
-
+    InitWindow(WINDOW_WIDTH, WINDOW_HEIGHT, "Raylib - CRT Shader Example");
     GameState gameState;
-
+    RenderState renderState;
+    renderState.tileSize = TILE_SIZE;
+    
     gameState.screen = GAME_MENU;
 
-
-
+    gameState.player.physics.transform.position = (Vector2){ 0, 0 };
+    gameState.player.physics.transform.collider = (Rectangle){ 0, 0, 32, 32 };
 
     SetTargetFPS(60);
 
@@ -22,16 +24,24 @@ int main(void)
         switch (gameState.screen)
         {
         case GAME_MENU:
+            if (IsKeyPressed(KEY_ENTER)) {
+                gameState.screen = GAME_PLAYING;
+                createMap(&gameState.map);
+            }
             BeginDrawing();
-
-            ClearBackground(RED);
-
-            DrawText("Hello, World!", 190, 200, 20, LIGHTGRAY);
-
+                ClearBackground(RED);
+                DrawCircle(WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2, 100, BLUE);
+                DrawText("Press Enter to start", 10, 10, 20, WHITE);
             EndDrawing();
             break;
         case GAME_PLAYING:
-            /* code */
+            handlePlayerInput(&gameState.player);
+            updatePlayer(&gameState.player, gameState.map);
+            BeginDrawing();
+                ClearBackground(BLACK);
+                drawPlayer(&gameState.player, &renderState);
+                drawMap(gameState.map, &renderState);
+            EndDrawing();
             break;
         case GAME_OVER:
             /* code */
@@ -39,9 +49,9 @@ int main(void)
         default:
             break;
         }
-        
     }
 
+    // De-Initialization
     CloseWindow();
 
     return 0;
