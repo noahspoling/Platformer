@@ -21,6 +21,7 @@ int main(void)
 
     while (!WindowShouldClose() && !IsKeyPressed(KEY_ESCAPE)) 
     {
+        float deltaTime = GetFrameTime();
         switch (gameState.screen)
         {
         case GAME_MENU:
